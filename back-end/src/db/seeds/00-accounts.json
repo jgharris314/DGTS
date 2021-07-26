@@ -1,0 +1,12 @@
+[
+	{
+		"username": "first_user",
+		"email": "bin@gus.com",
+		"password": "bungus"
+	},
+	{
+		"username": "second_user",
+		"email": "bin@gus2.com",
+		"password": "bungus"
+	}
+]
