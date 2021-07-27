@@ -1,10 +1,11 @@
-const service = require("./accounts.services");
+const service = require("./accounts.service");
 const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
 
 const hasProperties = require("../errors/hasProperties")(
 	"username",
 	"email",
-	"password"
+	"password",
+	"pdga_number"
 );
 
 async function authorize(req, res, next) {

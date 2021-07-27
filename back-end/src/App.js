@@ -10,6 +10,8 @@ const knex = require("./db/connection");
 
 const errorHandler = require("./errors/errorHandler");
 const notFound = require("./errors/notFound");
+const accountsRouter = require("./accounts/accounts.router");
+const leaguesRouter = require("./leagues/leagues.router");
 
 const store = new KnexSessionStore({
 	knex,
@@ -20,7 +22,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+// app.use(express.urlencoded({ extended: true }));
 app.use(
 	session({
 		secret: "mingusmaximus",
@@ -32,6 +34,9 @@ app.use(
 		},
 	})
 );
+
+app.use("/accounts", accountsRouter);
+app.use("/leagues", leaguesRouter);
 
 app.use(notFound);
 app.use(errorHandler);

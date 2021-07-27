@@ -5,6 +5,12 @@ exports.up = function (knex) {
 		table.timestamps(true, true);
 		table.integer("number_of_members").notNullable();
 		table.specificType("member_list", "INT[]");
+		table.integer("owner_id").unsigned();
+		table
+			.foreign("owner_id")
+			.references("user_id")
+			.inTable("users")
+			.onDelete("cascade");
 	});
 };
 
