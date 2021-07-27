@@ -1,12 +1,14 @@
 [
 	{
-		"username": "first_user",
-		"email": "bin@gus.com",
-		"password": "bungus"
+		"username": "morganTheFifth",
+		"email": "bingotti@scotti.com",
+		"password": "bungocho",
+		"pdga_number": 0
 	},
 	{
-		"username": "second_user",
-		"email": "bin@gus2.com",
-		"password": "bungus"
+		"username": "marveloProblemo",
+		"email": "meowww@zerrs.com",
+		"password": "BORISwasAgoodFRIEND",
+		"pdga_number": 1
 	}
 ]
