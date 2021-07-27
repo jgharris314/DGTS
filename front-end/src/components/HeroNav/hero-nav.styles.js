@@ -8,7 +8,8 @@ export const StyledHeroNav = styled.div`
 	width: 100%;
 	display: flex;
 	flex-direction: column;
-
+	margin-bottom: 0;
+	z-index: 5;
 	.hero-header {
 		display: flex;
 		flex-direction: row;

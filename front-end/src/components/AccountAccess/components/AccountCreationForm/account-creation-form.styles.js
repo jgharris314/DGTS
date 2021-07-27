@@ -8,6 +8,7 @@ export const StyledAccountCreationForm = styled.div`
 	margin: 0 auto;
 	border-radius: 10px;
 	padding: 0.5rem;
+	/* height: 70vh; */
 	.creation-form {
 		font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 		display: flex;

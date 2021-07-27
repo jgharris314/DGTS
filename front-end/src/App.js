@@ -1,12 +1,13 @@
 import "./App.css";
 import React, { useEffect, useState } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 import HeroNav from "./components/HeroNav/HeroNav";
 import HomeSection from "./components/HomeSection/HomeSection";
 import AccountAccess from "./components/AccountAccess/AccountAccess";
 import ContactSection from "./components/ContactSection/ContactSection";
 import AboutSection from "./components/AboutSection/AboutSection";
 import LeagueSection from "./components/LeagueSection/LeagueSection";
+import FooterSection from "./components/FooterSection/FooterSection";
 function App() {
 	const navOptions = ["Home", "About", "League", "Contact", "Accounts"];
 	const [loggedIn, setLoggedIn] = useState(false);
@@ -18,6 +19,9 @@ function App() {
 			<HeroNav navOptions={navOptions} />
 			{/* Begin individual page routing */}
 			<Switch>
+				<Route exact={true} path="/">
+					<Redirect to={"/home"} />
+				</Route>
 				<Route path="/about" exact>
 					<AboutSection />
 				</Route>
@@ -39,6 +43,7 @@ function App() {
 					<LeagueSection />
 				</Route>
 			</Switch>
+			<FooterSection />
 		</div>
 	);
 }
