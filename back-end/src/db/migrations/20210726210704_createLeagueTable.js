@@ -5,6 +5,7 @@ exports.up = function (knex) {
 		table.timestamps(true, true);
 		table.integer("number_of_members").notNullable();
 		table.specificType("member_list", "INT[]");
+		table.string("location").notNullable();
 		table.integer("owner_id").unsigned();
 		table
 			.foreign("owner_id")

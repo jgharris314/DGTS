@@ -1,5 +1,13 @@
 [
-	{ "league_name": "Woodchipper League", "number_of_members": 100 },
+	{
+		"league_name": "Woodchipper League",
+		"number_of_members": 100,
+		"location": "Denver, CO"
+	},
 
-	{ "league_name": "Scorcher League", "number_of_members": 50 }
+	{
+		"league_name": "Scorcher League",
+		"number_of_members": 50,
+		"location": "Denver, TX"
+	}
 ]

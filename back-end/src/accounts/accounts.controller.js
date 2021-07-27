@@ -41,7 +41,26 @@ async function create(req, res, next) {
 		.catch(next);
 }
 
+async function list(req, res, next) {
+	let accounts = await service.list();
+	res.json({ data: accounts });
+}
+
+async function listAccountById(req, res, next) {
+	let id = req.body.data.user_id;
+
+	const accountById = await service.listAccountById(id);
+	accountById
+		? res.json({ data: accountById })
+		: next({
+				status: 404,
+				message: `Account Id: ${id} Not Found`,
+		  });
+}
+
 module.exports = {
 	authorize: [asyncErrorBoundary(authorize)],
 	create: [hasProperties, asyncErrorBoundary(create)],
+	list,
+	listAccountById,
 };

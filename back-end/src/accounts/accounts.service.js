@@ -17,9 +17,20 @@ async function update(account_id, newAccountData) {
 		.update(newAccountData, "*");
 	return res[0];
 }
+function listAccountById(id) {
+	return knex("users")
+		.select("username")
+		.where({ user_id: id })
+		.then((res) => res[0]);
+}
 
+function list() {
+	return knex("users").select("username");
+}
 module.exports = {
 	authorization,
 	create,
 	update,
+	list,
+	listAccountById,
 };
