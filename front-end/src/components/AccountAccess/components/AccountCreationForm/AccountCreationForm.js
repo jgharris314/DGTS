@@ -118,8 +118,6 @@ const CreationForm = () => {
 						id="pdga_number"
 						onChange={handleChange}
 						required
-						// pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,32}$"
-						// placeholder={"8 letters 1 upper 1 #"}
 					/>
 				</div>
 				<div className="creation-form-row">
@@ -141,7 +139,7 @@ const CreationForm = () => {
 						<option id="account_type" value="player">
 							Player
 						</option>
-						<option id="account_type" value="Manager">
+						<option id="account_type" value="manager">
 							Manager
 						</option>
 					</select>

@@ -13,7 +13,7 @@ export const StyledHeroNav = styled.div`
 	.hero-header {
 		display: flex;
 		flex-direction: row;
-		/* text-align: right; */
+		justify-content: center;
 		width: 100%;
 		position: relative;
 		margin: 0 auto;

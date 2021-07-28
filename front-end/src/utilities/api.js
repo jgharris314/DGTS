@@ -73,7 +73,6 @@ export async function login(account, signal) {
 		body: JSON.stringify({ data: account }),
 		signal,
 	};
-	console.log("bungus");
 	const res = await fetchJson(url, options);
 	return res;
 }

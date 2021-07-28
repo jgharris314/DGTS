@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import HeroNav from "./components/HeroNav/HeroNav";
 import HomeSection from "./components/HomeSection/HomeSection";
@@ -11,7 +11,11 @@ import FooterSection from "./components/FooterSection/FooterSection";
 function App() {
 	const navOptions = ["Home", "About", "League", "Contact", "Account"];
 	const [loggedIn, setLoggedIn] = useState(false);
-	const defaultUser = { username: "guest", pdga_number: 0 };
+	const defaultUser = {
+		username: "guest",
+		pdga_number: Infinity,
+		account_type: "guest",
+	};
 	const [activeUser, setActiveUser] = useState(defaultUser);
 	return (
 		<div className="App">
@@ -40,7 +44,7 @@ function App() {
 					<HomeSection />
 				</Route>
 				<Route path="/league" exact>
-					<LeagueSection />
+					<LeagueSection activeUser={activeUser} />
 				</Route>
 			</Switch>
 			<FooterSection />

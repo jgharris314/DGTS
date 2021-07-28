@@ -22,6 +22,7 @@ async function authorize(req, res, next) {
 					req.session.pdga_number = results[0].pdga_number;
 					req.session.account_type = results[0].account_type;
 					req.session.nice = "nice";
+					req.session.user_id = results[0].user_id;
 					res.locals.session = req.session;
 					res.json(res.locals.session);
 				} else {
