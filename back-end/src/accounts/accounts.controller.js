@@ -19,6 +19,9 @@ async function authorize(req, res, next) {
 				if (results.length > 0) {
 					req.session.loggedin = true;
 					req.session.username = username;
+					req.session.pdga_number = results[0].pdga_number;
+					req.session.account_type = results[0].account_type;
+					req.session.nice = "nice";
 					res.locals.session = req.session;
 					res.json(res.locals.session);
 				} else {
