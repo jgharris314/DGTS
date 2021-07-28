@@ -38,10 +38,10 @@ async function fetchJson(url, options, onCancel) {
 		if (payload.error) {
 			return Promise.reject({ message: payload.error });
 		}
-		return payload.data;
+		return payload;
 	} catch (error) {
 		if (error.name !== "AbortError") {
-			console.error(error.stack);
+			console.error(error);
 			throw error;
 		}
 		return Promise.resolve(onCancel);
@@ -62,7 +62,8 @@ export async function createAccount(account, signal) {
 		body: JSON.stringify({ data: account }),
 		signal,
 	};
-	return await fetchJson(url, options);
+	const res = await fetchJson(url, options);
+	return res;
 }
 export async function login(account, signal) {
 	const url = `${API_BASE_URL}/accounts/authorize`;
@@ -72,5 +73,7 @@ export async function login(account, signal) {
 		body: JSON.stringify({ data: account }),
 		signal,
 	};
-	return await fetchJson(url, options);
+	console.log("bungus");
+	const res = await fetchJson(url, options);
+	return res;
 }

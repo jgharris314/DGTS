@@ -11,12 +11,11 @@ const hasProperties = require("../errors/hasProperties")(
 async function authorize(req, res, next) {
 	const username = req.body.data.username;
 	const password = req.body.data.password;
+
 	if (username && password) {
-		console.log("username:", username, "password:", password);
 		service
 			.authorization(username, password)
 			.then((results) => {
-				console.log("results", results);
 				if (results.length > 0) {
 					req.session.loggedin = true;
 					req.session.username = username;

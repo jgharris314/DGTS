@@ -8,10 +8,14 @@ const LoginForm = ({ loggedIn, setLoggedIn, activeUser, setActiveUser }) => {
 	const history = useHistory();
 	const [formData, setFormData] = useState({ ...initialFormData });
 
-	async function handleLogin() {
+	async function handleLogin(event) {
+		event.preventDefault();
 		const abortController = new AbortController();
+
 		const results = await login(formData, abortController.signal);
-		console.log(results);
+
+		setActiveUser({ username: results.username });
+		history.push("/home");
 		return () => abortController.abort;
 	}
 
@@ -29,9 +33,12 @@ const LoginForm = ({ loggedIn, setLoggedIn, activeUser, setActiveUser }) => {
 
 	return (
 		<StyledLoginForm>
-			<form onSubmit={() => handleLogin()} className="login-form">
+			<form
+				onSubmit={(event) => handleLogin(event)}
+				className="login-form"
+			>
 				<div className="login-form-row">
-					<label className="login-form-row-label" htmlFor="userName">
+					<label className="login-form-row-label" htmlFor="username">
 						User Name:
 					</label>
 					<input

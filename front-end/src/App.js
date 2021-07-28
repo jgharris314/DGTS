@@ -16,7 +16,7 @@ function App() {
 	return (
 		<div className="App">
 			{/* Default nav that is always present */}
-			<HeroNav navOptions={navOptions} />
+			<HeroNav navOptions={navOptions} activeUser={activeUser} />
 			{/* Begin individual page routing */}
 			<Switch>
 				<Route exact={true} path="/">

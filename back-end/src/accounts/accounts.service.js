@@ -1,10 +1,10 @@
 const knex = require("../db/connection");
 
-async function authorization(username, password) {
-	const res = await knex("users")
+function authorization(username, password) {
+	return knex("users")
 		.select("*")
-		.where({ username: username, password: password });
-	return res;
+		.where({ username: username, password: password })
+		.then((res) => res);
 }
 async function create(account) {
 	const res = await knex("users").insert(account, "*");
