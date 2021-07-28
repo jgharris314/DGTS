@@ -9,9 +9,9 @@ import AboutSection from "./components/AboutSection/AboutSection";
 import LeagueSection from "./components/LeagueSection/LeagueSection";
 import FooterSection from "./components/FooterSection/FooterSection";
 function App() {
-	const navOptions = ["Home", "About", "League", "Contact", "Accounts"];
+	const navOptions = ["Home", "About", "League", "Contact", "Account"];
 	const [loggedIn, setLoggedIn] = useState(false);
-	const defaultUser = { username: "guest" };
+	const defaultUser = { username: "guest", pdga_number: 0 };
 	const [activeUser, setActiveUser] = useState(defaultUser);
 	return (
 		<div className="App">
@@ -25,7 +25,7 @@ function App() {
 				<Route path="/about" exact>
 					<AboutSection />
 				</Route>
-				<Route path="/accounts" exact>
+				<Route path="/account" exact>
 					<AccountAccess
 						loggedIn={loggedIn}
 						setLoggedIn={setLoggedIn}

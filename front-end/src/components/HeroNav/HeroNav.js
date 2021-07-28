@@ -14,6 +14,8 @@ export default function HeroNav({ navOptions, activeUser }) {
 				))}
 			</ul>
 			<p>Welcome {activeUser.username}</p>
+			<p>Account Type: {activeUser.account_type}</p>
+			<p>PDGA Number: {activeUser.pdga_number}</p>
 		</StyledHeroNav>
 	);
 }

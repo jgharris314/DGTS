@@ -14,7 +14,7 @@ const LoginForm = ({ loggedIn, setLoggedIn, activeUser, setActiveUser }) => {
 
 		const results = await login(formData, abortController.signal);
 
-		setActiveUser({ username: results.username });
+		setActiveUser(results);
 		history.push("/home");
 		return () => abortController.abort;
 	}
