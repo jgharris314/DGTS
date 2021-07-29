@@ -13,8 +13,11 @@ const LoginForm = ({ loggedIn, setLoggedIn, activeUser, setActiveUser }) => {
 		const abortController = new AbortController();
 
 		const results = await login(formData, abortController.signal);
-
+		console.log(results);
 		setActiveUser(results);
+		const shaped = { data: { results } };
+		localStorage.setItem("activeUser", JSON.stringify(results));
+		console.log(localStorage.getItem("activeUser"));
 		history.push("/home");
 		return () => abortController.abort;
 	}

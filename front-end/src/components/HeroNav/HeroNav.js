@@ -4,8 +4,9 @@ import { Link } from "react-router-dom";
 export default function HeroNav({ navOptions, activeUser }) {
 	return (
 		<StyledHeroNav>
-			<h1 className="hero-header">DISC GOLF TAG SYSTEM</h1>
-
+			<div className="hero-header">
+				<h1>Karp's Tagpalooza</h1>
+			</div>
 			<ul className="nav-list">
 				{navOptions.map((e) => (
 					<Link to={`/${e.toLowerCase()}`} className="nav-list-item">

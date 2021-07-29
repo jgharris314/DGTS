@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import HeroNav from "./components/HeroNav/HeroNav";
 import HomeSection from "./components/HomeSection/HomeSection";
@@ -17,6 +17,13 @@ function App() {
 		account_type: "guest",
 	};
 	const [activeUser, setActiveUser] = useState(defaultUser);
+	useEffect(() => {
+		const loggedInUser = localStorage.getItem("activeUser");
+		if (loggedInUser !== "undefined") {
+			const foundUser = JSON.parse(loggedInUser);
+			setActiveUser(foundUser);
+		}
+	}, []);
 	return (
 		<div className="App">
 			{/* Default nav that is always present */}
