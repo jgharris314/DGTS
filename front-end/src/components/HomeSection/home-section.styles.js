@@ -6,4 +6,5 @@ export const StyledHomeSection = styled.div`
 	width: 85%;
 	position: relative;
 	margin: 0 auto;
+	padding: 2%;
 `;

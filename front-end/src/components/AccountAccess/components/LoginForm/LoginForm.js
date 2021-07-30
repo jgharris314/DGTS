@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { StyledLoginForm } from "./login-form.styles";
 import { login } from "../../../../utilities/api";
 
-const LoginForm = ({ loggedIn, setLoggedIn, activeUser, setActiveUser }) => {
+const LoginForm = ({ activeUser, setActiveUser }) => {
 	const initialFormData = { username: "", password: "" };
 	const history = useHistory();
 	const [formData, setFormData] = useState({ ...initialFormData });

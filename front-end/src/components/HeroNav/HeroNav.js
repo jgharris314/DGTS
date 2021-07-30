@@ -8,6 +8,7 @@ export default function HeroNav({
 	defaultUser,
 }) {
 	const [reRender, setReRender] = useState(false);
+
 	const handleLogOut = () => {
 		setActiveUser(defaultUser);
 		localStorage.setItem("activeUser", "");

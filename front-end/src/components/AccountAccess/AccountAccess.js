@@ -3,12 +3,7 @@ import { StyledAccountAccess } from "./account-access.styles";
 import AccountCreationForm from "./components/AccountCreationForm/AccountCreationForm";
 import LoginForm from "./components/LoginForm/LoginForm";
 
-export default function AccountAccess({
-	loggedIn,
-	setLoggedIn,
-	activeUser,
-	setActiveUser,
-}) {
+export default function AccountAccess({ activeUser, setActiveUser }) {
 	const [isCreateAccount, setIsCreateAccount] = useState(false);
 
 	const handleChange = (e) => {
@@ -47,8 +42,6 @@ export default function AccountAccess({
 				<AccountCreationForm />
 			) : (
 				<LoginForm
-					loggedIn={loggedIn}
-					setLoggedIn={setLoggedIn}
 					activeUser={activeUser}
 					setActiveUser={setActiveUser}
 				/>

@@ -26,9 +26,11 @@ headers.append("Content-Type", "application/json");
  *  If the response is not in the 200 - 399 range the promise is rejected.
  */
 async function fetchJson(url, options, onCancel) {
+	console.log("nice");
 	try {
 		const response = await fetch(url, options);
-
+		console.log("red");
+		console.log(response);
 		if (response.status === 204) {
 			return null;
 		}
@@ -41,6 +43,7 @@ async function fetchJson(url, options, onCancel) {
 		}
 		return payload.data;
 	} catch (error) {
+		console.log("blue");
 		if (error.name !== "AbortError") {
 			console.error(error);
 			throw error;
@@ -73,15 +76,18 @@ export async function login(account, signal) {
 }
 
 export async function createNewLeague(league, signal) {
+	console.log("purple");
+	console.log(league);
 	const url = `${API_BASE_URL}/leagues`;
 	const options = {
 		method: "POST",
+
 		headers,
 		body: JSON.stringify({ data: league }),
 		signal,
 	};
-	console.log(url);
-	console.log(league);
+	console.log(options.body);
+	// console.log(league);
 	const res = await fetchJson(url, options);
 	console.log(res);
 	console.log("yellow");

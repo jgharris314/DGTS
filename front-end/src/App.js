@@ -9,8 +9,8 @@ import AboutSection from "./components/AboutSection/AboutSection";
 import LeagueSection from "./components/LeagueSection/LeagueSection";
 import FooterSection from "./components/FooterSection/FooterSection";
 function App() {
-	const navOptions = ["Home", "About", "League", "Contact", "Account"];
-	const [loggedIn, setLoggedIn] = useState(false);
+	const navOptions = ["Home", "About", "Leagues", "Contact", "Account"];
+
 	const defaultUser = {
 		username: "guest",
 		pdga_number: Infinity,
@@ -49,8 +49,6 @@ function App() {
 				</Route>
 				<Route path="/account" exact>
 					<AccountAccess
-						loggedIn={loggedIn}
-						setLoggedIn={setLoggedIn}
 						activeUser={activeUser}
 						setActiveUser={setActiveUser}
 					/>
@@ -61,7 +59,7 @@ function App() {
 				<Route path="/home" exact>
 					<HomeSection />
 				</Route>
-				<Route path="/league" exact>
+				<Route path="/leagues" exact>
 					<LeagueSection activeUser={activeUser} />
 				</Route>
 			</Switch>

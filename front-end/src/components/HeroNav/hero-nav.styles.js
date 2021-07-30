@@ -23,9 +23,10 @@ export const StyledHeroNav = styled.div`
 		background-color: black;
 		display: flex;
 		flex-direction: column;
-		width: 40%;
-		margin: 10px auto;
+		width: 35%;
+		margin: 10px 0px 10px 10%;
 		padding: 1%;
+		font-size: 12px;
 		&-item {
 			display: flex;
 			flex-direction: row;

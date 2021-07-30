@@ -4,7 +4,7 @@ import { createNewLeague } from "../../../../utilities/api";
 import { useHistory } from "react-router-dom";
 
 export default function ManagerLeague({ activeUser }) {
-	const numLeagues = 0;
+	const [ownedLeagues, setOwnedLeagues] = useState([]);
 	const history = useHistory();
 	const [createLeague, setCreateLeague] = useState(false);
 	const [formData, setFormData] = useState({});
@@ -20,10 +20,11 @@ export default function ManagerLeague({ activeUser }) {
 		});
 	};
 
-	const handleSubmit = () => {
+	const handleSubmit = (event) => {
+		event.preventDefault();
 		const abortController = new AbortController();
 		const shaped = { ...formData, owner_id: Number(activeUser.user_id) };
-		createNewLeague(shaped, abortController.signal);
+		createNewLeague(shaped, abortController.signal).then(history.go(0));
 		return () => abortController.abort;
 	};
 
@@ -34,7 +35,7 @@ export default function ManagerLeague({ activeUser }) {
 	return (
 		<StyledManagerLeague>
 			<h2>Welcome to your leagues page {activeUser.username}</h2>
-			{numLeagues === 0 ? (
+			{ownedLeagues.length === 0 ? (
 				<div>You do not own any leagues</div>
 			) : (
 				<div>Interesting league stuff</div>
@@ -47,7 +48,7 @@ export default function ManagerLeague({ activeUser }) {
 				)}
 			</button>
 			{createLeague ? (
-				<form onSubmit={() => handleSubmit()}>
+				<form onSubmit={(event) => handleSubmit(event)}>
 					<label htmlFor="league_name">League Name</label>
 					<input
 						type="text"
