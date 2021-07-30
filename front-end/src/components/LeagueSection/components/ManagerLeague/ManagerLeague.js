@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { StyledManagerLeague } from "./manager-league.styles";
-import { createNewLeague } from "../../../../utilities/api";
+import { createNewLeague, listLeagueById } from "../../../../utilities/api";
 import { useHistory } from "react-router-dom";
 
 export default function ManagerLeague({ activeUser }) {
@@ -8,7 +9,16 @@ export default function ManagerLeague({ activeUser }) {
 	const history = useHistory();
 	const [createLeague, setCreateLeague] = useState(false);
 	const [formData, setFormData] = useState({});
-	const handleClick = () => {
+
+	useEffect(() => {
+		const abortController = new AbortController();
+		listLeagueById(activeUser.user_id, abortController.signal)
+			.then((res) => setOwnedLeagues(res))
+			.catch((error) => error);
+		return () => abortController.abort;
+	}, [activeUser.user_id]);
+
+	const handleCreateLeagueMode = () => {
 		setCreateLeague(!createLeague);
 	};
 
@@ -38,9 +48,26 @@ export default function ManagerLeague({ activeUser }) {
 			{ownedLeagues.length === 0 ? (
 				<div>You do not own any leagues</div>
 			) : (
-				<div>Interesting league stuff</div>
+				<div className="owned-leagues">
+					These are the current leagues that you run
+					{ownedLeagues.map((league) => (
+						<div className="owned-leagues-individual">
+							<div>League: {league.league_name}</div>
+							<div>Max capacity: {league.number_of_members}</div>
+							<div>
+								Current member count:{" "}
+								{league.member_list
+									? league.member_list.length
+									: 0}
+							</div>
+							<Link to={`/leagues/info/${league.league_id}`}>
+								View
+							</Link>
+						</div>
+					))}
+				</div>
 			)}
-			<button onClick={() => handleClick()}>
+			<button onClick={() => handleCreateLeagueMode()}>
 				{createLeague ? (
 					<div>Close menu</div>
 				) : (
@@ -55,7 +82,6 @@ export default function ManagerLeague({ activeUser }) {
 						name="league_name"
 						id="league_name"
 						onChange={handleChange}
-						// value={formData["league_name"]}
 					></input>
 					<label htmlFor="number_of_members">Number of Members</label>
 					<input
@@ -63,7 +89,6 @@ export default function ManagerLeague({ activeUser }) {
 						id="number_of_members"
 						type="number"
 						onChange={handleChange}
-						// value={formData["number_of_members"]}
 					></input>
 					<label htmlFor="location">Location</label>
 					<input

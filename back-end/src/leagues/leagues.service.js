@@ -5,11 +5,16 @@ async function create(league) {
 	return res[0];
 }
 
-async function list() {
-	return knex("league").select("*");
+async function listById(id) {
+	return knex("league").select("*").where({ owner_id: id });
+}
+
+async function listByLeagueId(id) {
+	return knex("league").select("*").where({ league_id: id }).first();
 }
 
 module.exports = {
 	create,
-	list,
+	listById,
+	listByLeagueId,
 };

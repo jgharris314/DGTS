@@ -8,6 +8,7 @@ import ContactSection from "./components/ContactSection/ContactSection";
 import AboutSection from "./components/AboutSection/AboutSection";
 import LeagueSection from "./components/LeagueSection/LeagueSection";
 import FooterSection from "./components/FooterSection/FooterSection";
+import ActiveLeagueInfo from "./components/ActiveLeagueInfo/ActiveLeagueInfo";
 function App() {
 	const navOptions = ["Home", "About", "Leagues", "Contact", "Account"];
 
@@ -58,6 +59,9 @@ function App() {
 				</Route>
 				<Route path="/home" exact>
 					<HomeSection />
+				</Route>
+				<Route path="/leagues/info/:league_id" exact>
+					<ActiveLeagueInfo />
 				</Route>
 				<Route path="/leagues" exact>
 					<LeagueSection activeUser={activeUser} />

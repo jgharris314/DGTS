@@ -9,8 +9,15 @@ const methodNotAllowed = require("../errors/methodNotAllowed");
 const controller = require("./leagues.controller");
 
 router
+	.route("/info/:league_id")
+	.get(controller.listByLeagueId)
+	.all(methodNotAllowed);
+
+router.route("/:user_id").get(controller.listById).all(methodNotAllowed);
+
+router
 	.route("/")
-	.get(controller.list)
+	.get(controller.listById)
 	.post(controller.create)
 	.all(methodNotAllowed);
 

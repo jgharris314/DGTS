@@ -12,12 +12,20 @@ async function create(req, res, next) {
 		.then((data) => res.status(201).json({ data }))
 		.catch(next);
 }
-async function list(req, res, next) {
-	let leagues = await service.list();
+async function listById(req, res, next) {
+	const id = req.params.user_id;
+	let leagues = await service.listById(id);
+	res.json({ data: leagues });
+}
+
+async function listByLeagueId(req, res, next) {
+	const id = req.params.league_id;
+	let leagues = await service.listByLeagueId(id);
 	res.json({ data: leagues });
 }
 
 module.exports = {
 	create: [hasProperties, asyncErrorBoundary(create)],
-	list,
+	listById,
+	listByLeagueId,
 };
