@@ -7,9 +7,9 @@ import PlayerLeague from "./components/PlayerLeague/PlayerLeague";
 export default function LeagueSection({ activeUser }) {
 	const renderLeagueSection = () => {
 		if (activeUser.account_type.toLowerCase() === "manager") {
-			return <ManagerLeague />;
+			return <ManagerLeague activeUser={activeUser} />;
 		} else if (activeUser.account_type.toLowerCase() === "player") {
-			return <PlayerLeague />;
+			return <PlayerLeague activeUser={activeUser} />;
 		} else {
 			return (
 				<p>

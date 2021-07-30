@@ -11,13 +11,9 @@ const LoginForm = ({ loggedIn, setLoggedIn, activeUser, setActiveUser }) => {
 	async function handleLogin(event) {
 		event.preventDefault();
 		const abortController = new AbortController();
-
 		const results = await login(formData, abortController.signal);
-		console.log(results);
 		setActiveUser(results);
-		const shaped = { data: { results } };
 		localStorage.setItem("activeUser", JSON.stringify(results));
-		console.log(localStorage.getItem("activeUser"));
 		history.push("/home");
 		return () => abortController.abort;
 	}
@@ -47,7 +43,6 @@ const LoginForm = ({ loggedIn, setLoggedIn, activeUser, setActiveUser }) => {
 					<input
 						className="login-form-row-input"
 						type="text"
-						// pattern="(?=.*[a-z])(?=.*[A-Z].{3,})"
 						name="username"
 						id="username"
 						onChange={handleChange}

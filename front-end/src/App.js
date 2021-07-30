@@ -19,8 +19,10 @@ function App() {
 	const [activeUser, setActiveUser] = useState(defaultUser);
 	useEffect(() => {
 		const loggedInUser = localStorage.getItem("activeUser");
+		console.log(loggedInUser);
 		if (loggedInUser !== "undefined") {
 			const foundUser = JSON.parse(loggedInUser);
+			console.log(foundUser.cookie.expires, Date.now());
 			setActiveUser(foundUser);
 		}
 	}, []);

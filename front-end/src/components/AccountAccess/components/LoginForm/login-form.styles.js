@@ -53,7 +53,7 @@ export const StyledLoginForm = styled.div`
 			-45deg,
 			rgba(199, 144, 14, 0.8),
 			rgba(255, 255, 255, 0.4),
-			rgba(199, 144, 14, 1)
+			rgba(199, 144, 14, 0.8)
 		);
 	}
 	.cancel {

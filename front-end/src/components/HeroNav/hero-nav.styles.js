@@ -19,6 +19,21 @@ export const StyledHeroNav = styled.div`
 	margin-bottom: 0;
 	z-index: 5;
 	box-shadow: 0px 0px 60px inset ${secondaryDark};
+	.account-info {
+		background-color: black;
+		display: flex;
+		flex-direction: column;
+		width: 40%;
+		margin: 10px auto;
+		padding: 1%;
+		&-item {
+			display: flex;
+			flex-direction: row;
+			margin-top: 0px;
+			margin-bottom: 0px;
+			padding: 0px;
+		}
+	}
 	.hero-header {
 		color: ${lightTone};
 		display: flex;
@@ -28,7 +43,6 @@ export const StyledHeroNav = styled.div`
 		position: relative;
 		margin: 0 auto;
 		border-radius: 5px;
-
 		box-shadow: 0px 0px 100px inset ${secondaryDark};
 		padding: 0px;
 		margin-top: 10px;

@@ -38,7 +38,7 @@ async function fetchJson(url, options, onCancel) {
 		if (payload.error) {
 			return Promise.reject({ message: payload.error });
 		}
-		return payload;
+		return payload.data;
 	} catch (error) {
 		if (error.name !== "AbortError") {
 			console.error(error);
@@ -47,12 +47,6 @@ async function fetchJson(url, options, onCancel) {
 		return Promise.resolve(onCancel);
 	}
 }
-
-/**
- * Retrieves all existing kendama.
- * @returns {Promise<[kendama]>}
- *  a promise that resolves to a possibly empty array of kendama saved in the database.
- */
 
 export async function createAccount(account, signal) {
 	const url = `${API_BASE_URL}/accounts`;
@@ -75,4 +69,19 @@ export async function login(account, signal) {
 	};
 	const res = await fetchJson(url, options);
 	return res;
+}
+
+export async function createNewLeague(league, signal) {
+	const url = `${API_BASE_URL}/leagues`;
+	const options = {
+		method: "POST",
+		headers,
+		body: JSON.stringify({ data: league }),
+		signal,
+	};
+	console.log(url);
+	console.log(league);
+	const res = await fetchJson(url, options);
+	console.log(res);
+	// return res;
 }
