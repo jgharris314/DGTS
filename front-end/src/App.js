@@ -19,17 +19,26 @@ function App() {
 	const [activeUser, setActiveUser] = useState(defaultUser);
 	useEffect(() => {
 		const loggedInUser = localStorage.getItem("activeUser");
-		console.log(loggedInUser);
-		if (loggedInUser !== "undefined") {
+		const today = new Date(Date.now());
+		if (loggedInUser) {
 			const foundUser = JSON.parse(loggedInUser);
-			console.log(foundUser.cookie.expires, Date.now());
-			setActiveUser(foundUser);
+			if (foundUser.cookie.expires > today.toISOString()) {
+				return setActiveUser(foundUser);
+			} else {
+				setActiveUser(defaultUser);
+				localStorage.setItem("activeUser", "");
+			}
 		}
 	}, []);
 	return (
 		<div className="App">
 			{/* Default nav that is always present */}
-			<HeroNav navOptions={navOptions} activeUser={activeUser} />
+			<HeroNav
+				navOptions={navOptions}
+				activeUser={activeUser}
+				setActiveUser={setActiveUser}
+				defaultUser={defaultUser}
+			/>
 			{/* Begin individual page routing */}
 			<Switch>
 				<Route exact={true} path="/">

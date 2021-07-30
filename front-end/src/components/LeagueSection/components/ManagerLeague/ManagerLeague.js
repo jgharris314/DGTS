@@ -22,8 +22,7 @@ export default function ManagerLeague({ activeUser }) {
 
 	const handleSubmit = () => {
 		const abortController = new AbortController();
-		console.log(activeUser.user_id);
-		const shaped = { ...formData, owner_id: activeUser.user_id };
+		const shaped = { ...formData, owner_id: Number(activeUser.user_id) };
 		createNewLeague(shaped, abortController.signal);
 		return () => abortController.abort;
 	};

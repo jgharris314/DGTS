@@ -1,7 +1,22 @@
 import { StyledHeroNav } from "./hero-nav.styles";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-export default function HeroNav({ navOptions, activeUser }) {
+export default function HeroNav({
+	navOptions,
+	activeUser,
+	setActiveUser,
+	defaultUser,
+}) {
+	const [reRender, setReRender] = useState(false);
+	const handleLogOut = () => {
+		setActiveUser(defaultUser);
+		localStorage.setItem("activeUser", "");
+	};
+
+	useEffect(() => {
+		setReRender(!reRender);
+	}, [activeUser]);
+
 	return (
 		<StyledHeroNav>
 			<div className="hero-header">
@@ -28,6 +43,9 @@ export default function HeroNav({ navOptions, activeUser }) {
 				<div className="account-info-item">
 					PDGA Number: {activeUser.pdga_number}
 				</div>
+				{localStorage.getItem("activeUser") ? (
+					<button onClick={() => handleLogOut()}>Sign out!</button>
+				) : null}
 			</div>
 		</StyledHeroNav>
 	);

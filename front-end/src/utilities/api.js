@@ -34,7 +34,8 @@ async function fetchJson(url, options, onCancel) {
 		}
 
 		const payload = await response.json();
-
+		console.log("green");
+		console.log(payload);
 		if (payload.error) {
 			return Promise.reject({ message: payload.error });
 		}
@@ -83,5 +84,6 @@ export async function createNewLeague(league, signal) {
 	console.log(league);
 	const res = await fetchJson(url, options);
 	console.log(res);
+	console.log("yellow");
 	// return res;
 }
