@@ -18,6 +18,7 @@ export default function ActiveLeagueInfo() {
 		<StyledActiveLeagueInfo>
 			Name: {activeLeague.league_name}
 			Location: {activeLeague.location}
+			{/* add member will be loaded with queries? lookup member based on email, add user_id to league member_list. maybe? */}
 			<button>Add member</button>
 		</StyledActiveLeagueInfo>
 	);

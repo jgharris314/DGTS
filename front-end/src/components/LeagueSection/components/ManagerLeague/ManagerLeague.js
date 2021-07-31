@@ -5,6 +5,7 @@ import { createNewLeague, listLeagueById } from "../../../../utilities/api";
 import { useHistory } from "react-router-dom";
 
 export default function ManagerLeague({ activeUser }) {
+	const [render, setRender] = useState(false);
 	const [ownedLeagues, setOwnedLeagues] = useState([]);
 	const history = useHistory();
 	const [createLeague, setCreateLeague] = useState(false);
@@ -16,7 +17,7 @@ export default function ManagerLeague({ activeUser }) {
 			.then((res) => setOwnedLeagues(res))
 			.catch((error) => error);
 		return () => abortController.abort;
-	}, [activeUser.user_id]);
+	}, [activeUser.user_id, render]);
 
 	const handleCreateLeagueMode = () => {
 		setCreateLeague(!createLeague);
@@ -34,7 +35,10 @@ export default function ManagerLeague({ activeUser }) {
 		event.preventDefault();
 		const abortController = new AbortController();
 		const shaped = { ...formData, owner_id: Number(activeUser.user_id) };
-		createNewLeague(shaped, abortController.signal).then(history.go(0));
+		createNewLeague(shaped, abortController.signal);
+		setFormData({});
+		setCreateLeague(false);
+		setRender(!render);
 		return () => abortController.abort;
 	};
 
@@ -51,7 +55,10 @@ export default function ManagerLeague({ activeUser }) {
 				<div className="owned-leagues">
 					These are the current leagues that you run
 					{ownedLeagues.map((league) => (
-						<div className="owned-leagues-individual">
+						<div
+							className="owned-leagues-individual"
+							key={league.league_id}
+						>
 							<div>League: {league.league_name}</div>
 							<div>Max capacity: {league.number_of_members}</div>
 							<div>

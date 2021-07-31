@@ -10,7 +10,7 @@ import LeagueSection from "./components/LeagueSection/LeagueSection";
 import FooterSection from "./components/FooterSection/FooterSection";
 import ActiveLeagueInfo from "./components/ActiveLeagueInfo/ActiveLeagueInfo";
 function App() {
-	const navOptions = ["Home", "About", "Leagues", "Contact", "Account"];
+	const navOptions = ["Home", "About", "Leagues", "Account"];
 
 	const defaultUser = {
 		username: "guest",
