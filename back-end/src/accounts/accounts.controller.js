@@ -61,9 +61,22 @@ async function listAccountById(req, res, next) {
 		  });
 }
 
+async function listAccountByUsername(req, res, next) {
+	let username = req.params.username;
+
+	const accountByUsername = await service.listAccountByUsername(username);
+	accountByUsername
+		? res.json({ data: accountByUsername })
+		: next({
+				status: 404,
+				message: `Username: ${username} Not Found`,
+		  });
+}
+
 module.exports = {
 	authorize: [asyncErrorBoundary(authorize)],
 	create: [hasProperties, asyncErrorBoundary(create)],
 	list,
 	listAccountById,
+	listAccountByUsername: [asyncErrorBoundary(listAccountByUsername)],
 };

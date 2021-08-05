@@ -13,8 +13,7 @@ export default function LeagueSection({ activeUser }) {
 		} else {
 			return (
 				<p>
-					Please Sign in to use this feature
-					<br />
+					Please Sign in to Access Leagues
 					<Link to={`/account`} className="account-button">
 						Do the thing!
 					</Link>

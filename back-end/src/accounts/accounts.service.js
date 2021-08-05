@@ -23,6 +23,12 @@ function listAccountById(id) {
 		.where({ user_id: id })
 		.then((res) => res[0]);
 }
+function listAccountByUsername(username) {
+	return knex("users")
+		.select("user_id")
+		.where({ username: username })
+		.then((res) => res[0]);
+}
 
 function list() {
 	return knex("users").select("username");
@@ -33,4 +39,5 @@ module.exports = {
 	update,
 	list,
 	listAccountById,
+	listAccountByUsername,
 };

@@ -64,7 +64,10 @@ function App() {
 					<ActiveLeagueInfo />
 				</Route>
 				<Route path="/leagues" exact>
-					<LeagueSection activeUser={activeUser} />
+					<LeagueSection
+						activeUser={activeUser}
+						setActiveUser={setActiveUser}
+					/>
 				</Route>
 			</Switch>
 			<FooterSection />

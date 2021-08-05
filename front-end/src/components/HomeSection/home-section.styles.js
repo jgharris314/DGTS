@@ -7,4 +7,10 @@ export const StyledHomeSection = styled.div`
 	position: relative;
 	margin: 0 auto;
 	padding: 2%;
+	height: 65vh;
+
+	.home-txt {
+		margin-top: 10px;
+		font-size: 18px;
+	}
 `;

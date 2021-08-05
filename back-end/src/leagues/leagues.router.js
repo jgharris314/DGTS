@@ -19,6 +19,7 @@ router
 	.route("/")
 	.get(controller.listById)
 	.post(controller.create)
+	.put(controller.addMember)
 	.all(methodNotAllowed);
 
 module.exports = router;

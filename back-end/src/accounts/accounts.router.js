@@ -9,7 +9,10 @@ const methodNotAllowed = require("../errors/methodNotAllowed");
 const controller = require("./accounts.controller");
 
 router.route("/authorize").post(controller.authorize).all(methodNotAllowed);
-
+router
+	.route("/:username")
+	.get(controller.listAccountByUsername)
+	.all(methodNotAllowed);
 router
 	.route("/")
 	.get(controller.list)

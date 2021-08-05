@@ -55,6 +55,7 @@ export const StyledLoginForm = styled.div`
 			rgba(255, 255, 255, 0.4),
 			rgba(199, 144, 14, 0.8)
 		);
+		box-shadow: 0px 0px 8px black;
 	}
 	.cancel {
 		background-color: orange;
@@ -64,5 +65,6 @@ export const StyledLoginForm = styled.div`
 			rgba(255, 255, 255, 0.4),
 			rgba(210, 74, 0, 0.8)
 		);
+		box-shadow: 0px 0px 8px black;
 	}
 `;

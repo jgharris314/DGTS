@@ -13,8 +13,17 @@ async function listByLeagueId(id) {
 	return knex("league").select("*").where({ league_id: id }).first();
 }
 
+async function addMember(user_id, league_id) {
+	return knex("league")
+		.update({
+			member_list: knex.raw("array_append(member_list, ?)", [user_id]),
+		})
+		.where({ league_id: league_id });
+}
+
 module.exports = {
 	create,
 	listById,
 	listByLeagueId,
+	addMember,
 };

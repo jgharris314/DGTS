@@ -21,7 +21,7 @@ export default function HeroNav({
 	return (
 		<StyledHeroNav>
 			<div className="hero-header">
-				<h1>Fascinating Title Here</h1>
+				<h1>Global Tags</h1>
 			</div>
 			<ul className="nav-list">
 				{navOptions.map((e) => (

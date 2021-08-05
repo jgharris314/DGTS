@@ -107,3 +107,27 @@ export async function listLeagueByLeagueId(id, signal) {
 	const res = await fetchJson(url, options);
 	return res;
 }
+
+export async function addMemberToLeague(info, signal) {
+	const url = `${API_BASE_URL}/leagues`;
+	const options = {
+		method: "PUT",
+		headers,
+		body: JSON.stringify({ data: info }),
+		signal,
+	};
+	const res = await fetchJson(url, options);
+	return res;
+}
+
+export async function getMemberInfo(username, signal) {
+	const url = `${API_BASE_URL}/accounts/${username}`;
+	const options = {
+		method: "GET",
+		headers,
+
+		signal,
+	};
+	const res = await fetchJson(url, options);
+	return res;
+}
