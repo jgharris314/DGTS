@@ -11,6 +11,7 @@ export default function ActiveLeagueInfo() {
 	const { league_id } = useParams();
 	const [activeLeague, setActiveLeague] = useState({});
 	const [formData, setFormData] = useState({ username: "" });
+	const [render, setRender] = useState(false);
 
 	useEffect(() => {
 		const abortController = new AbortController();
@@ -18,7 +19,7 @@ export default function ActiveLeagueInfo() {
 			setActiveLeague
 		);
 		return () => abortController.abort;
-	}, [league_id]);
+	}, [league_id, render]);
 
 	const addMember = async (event) => {
 		event.preventDefault();
@@ -30,9 +31,9 @@ export default function ActiveLeagueInfo() {
 			league_id: activeLeague.league_id,
 		};
 
-		return await addMemberToLeague(preppedData).then(
-			setFormData({ username: "" })
-		);
+		//check to make sure user_id isnt in league first.
+
+		return await addMemberToLeague(preppedData).then(setRender(!render));
 	};
 
 	const handleChange = ({ target }) => {
@@ -60,8 +61,6 @@ export default function ActiveLeagueInfo() {
 			7. Global Rank
 			8. Global Rank change (num with green or red arrow)
 			*/}
-			Name: {activeLeague.league_name}
-			Location: {activeLeague.location}
 			{/* add member will be loaded with queries? lookup member based on email, add user_id to league member_list. maybe? */}
 			<form onSubmit={(event) => addMember(event)}>
 				<label htmlFor="username">Username:</label>
@@ -74,6 +73,14 @@ export default function ActiveLeagueInfo() {
 				/>
 				<button type="submit">Add member</button>
 			</form>
+			<div>Name: {activeLeague.league_name}</div>
+			<div>Location: {activeLeague.location}</div>
+			Members:{" "}
+			{activeLeague.member_list
+				? activeLeague.member_list.map((member) => (
+						<div key={member}>{member}</div>
+				  ))
+				: null}
 		</StyledActiveLeagueInfo>
 	);
 }
