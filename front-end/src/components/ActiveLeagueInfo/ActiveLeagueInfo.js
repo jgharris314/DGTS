@@ -12,6 +12,7 @@ export default function ActiveLeagueInfo() {
 	const [activeLeague, setActiveLeague] = useState({});
 	const [formData, setFormData] = useState({ username: "" });
 	const [render, setRender] = useState(false);
+	const [error, setError] = useState("");
 
 	useEffect(() => {
 		const abortController = new AbortController();
@@ -22,20 +23,29 @@ export default function ActiveLeagueInfo() {
 	}, [league_id, render]);
 
 	const addMember = async (event) => {
+		const { username } = formData;
+
 		event.preventDefault();
-		const user_id = await getMemberInfo(formData.username);
-		console.log(user_id);
-		console.log(activeLeague);
+		const user_id = await getMemberInfo(username).catch((error) => error);
+
 		const preppedData = {
 			user_id: user_id.user_id,
 			league_id: activeLeague.league_id,
 		};
 
-		//check to make sure user_id isnt in league first.
-
-		return await addMemberToLeague(preppedData).then(setRender(!render));
+		if (user_id.message) {
+			setError(`Username ${username} does not exist.`);
+			return null;
+		} else if (user_id.user_id) {
+			if (activeLeague.member_list.includes(user_id.user_id)) {
+				setError(`${username} is already in this league`);
+				return null;
+			} else {
+				await addMemberToLeague(preppedData);
+				return setRender(!render);
+			}
+		}
 	};
-
 	const handleChange = ({ target }) => {
 		const value = target.value;
 		setFormData({
@@ -63,6 +73,7 @@ export default function ActiveLeagueInfo() {
 			*/}
 			{/* add member will be loaded with queries? lookup member based on email, add user_id to league member_list. maybe? */}
 			<form onSubmit={(event) => addMember(event)}>
+				{error.length ? <div className="error-msg">{error}</div> : null}
 				<label htmlFor="username">Username:</label>
 				<input
 					type="text"
