@@ -23,7 +23,9 @@ async function authorize(req, res, next) {
 					req.session.account_type = results[0].account_type;
 					req.session.nice = "nice";
 					req.session.user_id = results[0].user_id;
+					req.session.first_name = results[0].first_name;
 					res.locals.session = req.session;
+
 					res.json({ data: res.locals.session });
 				} else {
 					res.send("Invalid Username or Password");

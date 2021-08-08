@@ -19,7 +19,13 @@ async function update(account_id, newAccountData) {
 }
 function listAccountById(id) {
 	return knex("users")
-		.select("username")
+		.select(
+			"username",
+			"first_name",
+			"last_name",
+			"global_rank",
+			"previous_global_rank"
+		)
 		.where({ user_id: id })
 		.then((res) => res[0]);
 }
