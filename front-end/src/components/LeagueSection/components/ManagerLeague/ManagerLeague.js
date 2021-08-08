@@ -48,7 +48,7 @@ export default function ManagerLeague({ activeUser }) {
 	};
 	return (
 		<StyledManagerLeague>
-			<h2>Welcome to your leagues page {activeUser.username}</h2>
+			<h2>Welcome to your leagues page {activeUser.first_name}</h2>
 			{ownedLeagues.length === 0 ? (
 				<div>You do not own any leagues</div>
 			) : (

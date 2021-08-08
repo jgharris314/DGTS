@@ -44,6 +44,8 @@ export default function ActiveLeagueInfo() {
 				await addMemberToLeague(preppedData);
 				return setRender(!render);
 			}
+		} else {
+			setError("Please provide a valid username!");
 		}
 	};
 	const handleChange = ({ target }) => {
@@ -66,9 +68,9 @@ export default function ActiveLeagueInfo() {
 			2. First Name
 			3. Last Name
 			4. Recent Rank Change (num with green or red arrow)
-			5. Last Event Played
-			6. Days until rank decays
-			7. Global Rank
+			5. Last Event Played (i am posponing this)
+			6. Days until rank decays (i am posponing this)
+			7. Global Rank (i have a col but idk how to actually use this)
 			8. Global Rank change (num with green or red arrow)
 			*/}
 			{/* add member will be loaded with queries? lookup member based on email, add user_id to league member_list. maybe? */}

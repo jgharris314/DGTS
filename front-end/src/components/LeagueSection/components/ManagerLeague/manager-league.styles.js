@@ -6,7 +6,7 @@ export const StyledManagerLeague = styled.div`
 	h2 {
 		margin-top: 0px;
 	}
-
+	padding-bottom: 80px;
 	.owned-leagues {
 		width: 85%;
 		background-color: black;

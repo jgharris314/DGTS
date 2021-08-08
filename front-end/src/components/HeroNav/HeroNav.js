@@ -36,7 +36,7 @@ export default function HeroNav({
 			</ul>
 			<div className="account-info">
 				<div className="account-info-item">
-					Name: {activeUser.username}
+					Name: {activeUser.first_name}
 				</div>
 				<div className="account-info-item">
 					Account Type: {activeUser.account_type}

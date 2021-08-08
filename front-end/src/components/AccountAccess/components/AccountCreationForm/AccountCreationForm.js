@@ -4,7 +4,13 @@ import { StyledAccountCreationForm } from "./account-creation-form.styles";
 import { createAccount } from "../../../../utilities/api";
 
 const CreationForm = () => {
-	const initialFormData = { username: "", email: "", password: "" };
+	const initialFormData = {
+		username: "",
+		email: "",
+		password: "",
+		first_name: "",
+		last_name: "",
+	};
 	const history = useHistory();
 	const [formData, setFormData] = useState({ ...initialFormData });
 	const [failedPass, setFailedPass] = useState(false);
@@ -64,6 +70,40 @@ const CreationForm = () => {
 						pattern="^[A-Za-z0-9._-]*$"
 						name="username"
 						id="username"
+						onChange={handleChange}
+						required
+					/>
+				</div>
+				<div className="creation-form-row">
+					<label
+						className="creation-form-row-label"
+						htmlFor="first_name"
+					>
+						First Name:
+					</label>
+					<input
+						className="creation-form-row-input"
+						type="text"
+						pattern="^[A-Za-z0-9._-]*$"
+						name="first_name"
+						id="first_name"
+						onChange={handleChange}
+						required
+					/>
+				</div>
+				<div className="creation-form-row">
+					<label
+						className="creation-form-row-label"
+						htmlFor="last_name"
+					>
+						Last Name:
+					</label>
+					<input
+						className="creation-form-row-input"
+						type="text"
+						pattern="^[A-Za-z0-9._-]*$"
+						name="last_name"
+						id="last_name"
 						onChange={handleChange}
 						required
 					/>
