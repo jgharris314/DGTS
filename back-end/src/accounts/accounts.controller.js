@@ -52,7 +52,7 @@ async function list(req, res, next) {
 }
 
 async function listAccountById(req, res, next) {
-	let id = req.body.data.user_id;
+	let id = req.params.user_id;
 
 	const accountById = await service.listAccountById(id);
 	accountById
@@ -75,10 +75,16 @@ async function listAccountByUsername(req, res, next) {
 		  });
 }
 
+async function listUsersInLeague(req, res, next) {
+	let accounts = await service.listUsersInLeague(req.body.data.member_list);
+	res.json({ data: accounts.rows });
+}
+
 module.exports = {
 	authorize: [asyncErrorBoundary(authorize)],
 	create: [hasProperties, asyncErrorBoundary(create)],
 	list,
 	listAccountById,
 	listAccountByUsername: [asyncErrorBoundary(listAccountByUsername)],
+	listUsersInLeague,
 };

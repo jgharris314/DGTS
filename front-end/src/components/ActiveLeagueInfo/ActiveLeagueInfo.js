@@ -5,6 +5,7 @@ import {
 	listLeagueByLeagueId,
 	addMemberToLeague,
 	getMemberInfo,
+	listUsersInLeague,
 } from "../../utilities/api";
 
 export default function ActiveLeagueInfo() {
@@ -13,14 +14,31 @@ export default function ActiveLeagueInfo() {
 	const [formData, setFormData] = useState({ username: "" });
 	const [render, setRender] = useState(false);
 	const [error, setError] = useState("");
+	const [leagueMembers, setLeagueMembers] = useState([]);
+
+	const loadMembers = async () => {
+		const abortController = new AbortController();
+		setLeagueMembers([]);
+		const preppedData = { member_list: activeLeague.member_list };
+		return listUsersInLeague(preppedData, abortController.signal).then(
+			setLeagueMembers
+		);
+	};
 
 	useEffect(() => {
 		const abortController = new AbortController();
-		listLeagueByLeagueId(league_id, abortController.signal).then(
-			setActiveLeague
-		);
+		listLeagueByLeagueId(league_id, abortController.signal)
+			.then(setActiveLeague)
+			.catch((error) => error);
+
+		loadMembers();
+
 		return () => abortController.abort;
-	}, [league_id, render]);
+	}, [
+		league_id,
+		render,
+		activeLeague.member_list ? activeLeague.member_list.length : null,
+	]);
 
 	const addMember = async (event) => {
 		const { username } = formData;
@@ -35,17 +53,24 @@ export default function ActiveLeagueInfo() {
 
 		if (user_id.message) {
 			setError(`Username ${username} does not exist.`);
-			return null;
+			setRender(!render);
+			return;
 		} else if (user_id.user_id) {
-			if (activeLeague.member_list.includes(user_id.user_id)) {
+			if (
+				activeLeague.member_list &&
+				activeLeague.member_list.includes(user_id.user_id)
+			) {
 				setError(`${username} is already in this league`);
-				return null;
+				setFormData({ username: "" });
+				return setRender(!render);
 			} else {
 				await addMemberToLeague(preppedData);
+				setFormData({ username: "" });
 				return setRender(!render);
 			}
 		} else {
 			setError("Please provide a valid username!");
+			setRender(!render);
 		}
 	};
 	const handleChange = ({ target }) => {
@@ -89,9 +114,15 @@ export default function ActiveLeagueInfo() {
 			<div>Name: {activeLeague.league_name}</div>
 			<div>Location: {activeLeague.location}</div>
 			Members:{" "}
-			{activeLeague.member_list
-				? activeLeague.member_list.map((member) => (
-						<div key={member}>{member}</div>
+			{/* <button
+				style={{ height: "100px", width: "100px" }}
+				onClick={() => loadMembers()}
+			></button> */}
+			{leagueMembers
+				? leagueMembers.map((e) => (
+						<div key={e.first_name + e.last_name}>
+							Name: {e.first_name}
+						</div>
 				  ))
 				: null}
 		</StyledActiveLeagueInfo>

@@ -22,7 +22,6 @@ function App() {
 		const loggedInUser = localStorage.getItem("activeUser");
 		const today = new Date(Date.now());
 		if (loggedInUser) {
-			console.log(loggedInUser);
 			const foundUser = JSON.parse(loggedInUser);
 			if (foundUser.cookie.expires > today.toISOString()) {
 				return setActiveUser(foundUser);

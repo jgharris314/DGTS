@@ -39,6 +39,17 @@ function listAccountByUsername(username) {
 function list() {
 	return knex("users").select("username");
 }
+
+function listUsersInLeague(league) {
+	return knex
+		.raw(
+			"select first_name, last_name, global_rank, previous_global_rank, username from users where user_id in (" +
+				league.map(() => "?").join(",") +
+				")",
+			[...league]
+		)
+		.then((res) => res);
+}
 module.exports = {
 	authorization,
 	create,
@@ -46,4 +57,5 @@ module.exports = {
 	list,
 	listAccountById,
 	listAccountByUsername,
+	listUsersInLeague,
 };

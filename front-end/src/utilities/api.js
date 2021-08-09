@@ -131,3 +131,16 @@ export async function getMemberInfo(username, signal) {
 	const res = await fetchJson(url, options);
 	return res;
 }
+
+export async function listUsersInLeague(member_list, signal) {
+	const url = `${API_BASE_URL}/accounts/load`;
+	const options = {
+		method: "POST",
+		headers,
+		body: JSON.stringify({ data: member_list }),
+		signal,
+	};
+
+	const res = await fetchJson(url, options);
+	return res;
+}
