@@ -9,9 +9,10 @@ import AboutSection from "./components/AboutSection/AboutSection";
 import LeagueSection from "./components/LeagueSection/LeagueSection";
 import FooterSection from "./components/FooterSection/FooterSection";
 import ActiveLeagueInfo from "./components/ActiveLeagueInfo/ActiveLeagueInfo";
+import { listLeagueById } from "./utilities/api";
 function App() {
 	const navOptions = ["Home", "About", "Leagues", "Account"];
-
+	const [ownedLeagues, setOwnedLeagues] = useState([]);
 	const defaultUser = {
 		username: "guest",
 		pdga_number: Infinity,
@@ -31,6 +32,14 @@ function App() {
 			}
 		}
 	}, []);
+
+	useEffect(() => {
+		const abortController = new AbortController();
+		listLeagueById(activeUser.user_id, abortController.signal)
+			.then((res) => setOwnedLeagues(res))
+			.catch((error) => error);
+		return () => abortController.abort;
+	}, [activeUser.user_id]);
 	return (
 		<div className="App">
 			{/* Default nav that is always present */}
@@ -61,12 +70,16 @@ function App() {
 					<HomeSection />
 				</Route>
 				<Route path="/leagues/info/:league_id" exact>
-					<ActiveLeagueInfo activeUser={activeUser} />
+					<ActiveLeagueInfo
+						activeUser={activeUser}
+						ownedLeagues={ownedLeagues}
+					/>
 				</Route>
 				<Route path="/leagues" exact>
 					<LeagueSection
 						activeUser={activeUser}
 						setActiveUser={setActiveUser}
+						ownedLeagues={ownedLeagues}
 					/>
 				</Route>
 			</Switch>

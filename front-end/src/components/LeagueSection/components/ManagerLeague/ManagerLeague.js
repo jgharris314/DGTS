@@ -4,20 +4,12 @@ import { StyledManagerLeague } from "./manager-league.styles";
 import { createNewLeague, listLeagueById } from "../../../../utilities/api";
 import { useHistory } from "react-router-dom";
 
-export default function ManagerLeague({ activeUser }) {
+export default function ManagerLeague({ activeUser, ownedLeagues }) {
 	const [render, setRender] = useState(false);
-	const [ownedLeagues, setOwnedLeagues] = useState([]);
+
 	const history = useHistory();
 	const [createLeague, setCreateLeague] = useState(false);
 	const [formData, setFormData] = useState({});
-
-	useEffect(() => {
-		const abortController = new AbortController();
-		listLeagueById(activeUser.user_id, abortController.signal)
-			.then((res) => setOwnedLeagues(res))
-			.catch((error) => error);
-		return () => abortController.abort;
-	}, [activeUser.user_id, render]);
 
 	const handleCreateLeagueMode = () => {
 		setCreateLeague(!createLeague);
@@ -59,7 +51,7 @@ export default function ManagerLeague({ activeUser }) {
 							className="owned-leagues-individual"
 							key={league.league_id}
 						>
-							<div>League: {league.league_name}</div>
+							<div>{league.league_name}</div>
 							<div>Max capacity: {league.number_of_members}</div>
 							<div>
 								Current member count:{" "}

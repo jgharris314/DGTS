@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useParams, useHistory } from "react-router";
 import { StyledActiveLeagueInfo } from "./active-league-info.styles";
 import {
 	listLeagueByLeagueId,
@@ -8,18 +8,21 @@ import {
 	listUsersInLeague,
 } from "../../utilities/api";
 
-export default function ActiveLeagueInfo() {
+export default function ActiveLeagueInfo({ ownedLeagues }) {
 	const { league_id } = useParams();
 	const [activeLeague, setActiveLeague] = useState({});
 	const [formData, setFormData] = useState({ username: "" });
 	const [render, setRender] = useState(false);
 	const [error, setError] = useState("");
 	const [leagueMembers, setLeagueMembers] = useState([]);
+	const history = useHistory();
 
-	const loadMembers = async () => {
+	const loadMembers = () => {
 		const abortController = new AbortController();
 		setLeagueMembers([]);
-		const preppedData = { member_list: activeLeague.member_list };
+		const preppedData = {
+			member_list: activeLeague.member_list,
+		};
 		return listUsersInLeague(preppedData, abortController.signal).then(
 			setLeagueMembers
 		);
@@ -66,6 +69,7 @@ export default function ActiveLeagueInfo() {
 			} else {
 				await addMemberToLeague(preppedData);
 				setFormData({ username: "" });
+				setError("");
 				return setRender(!render);
 			}
 		} else {
@@ -81,11 +85,24 @@ export default function ActiveLeagueInfo() {
 		});
 	};
 
+	const handleLeagueChange = (event) => {
+		event.preventDefault();
+		if (event.target.value !== "none" && league_id !== event.target.value) {
+			history.push(`/leagues/info/${event.target.value}`);
+			setRender(!render);
+		}
+	};
+
 	return (
 		<StyledActiveLeagueInfo>
 			{/* Ability to select between leagues owned and display the selected one */}
-			<select>
-				<option>Something</option>
+			<select onChange={(event) => handleLeagueChange(event)}>
+				<option value="none">Switch League?</option>
+				{ownedLeagues.map((league, index) => (
+					<option key={league.league_id} value={league.league_id}>
+						{league.league_name}
+					</option>
+				))}
 			</select>
 			{/* Desired Columns for member list 
 			0.Ranked Based Emoji 
@@ -113,18 +130,31 @@ export default function ActiveLeagueInfo() {
 			</form>
 			<div>Name: {activeLeague.league_name}</div>
 			<div>Location: {activeLeague.location}</div>
-			Members:{" "}
-			{/* <button
+			<div className="member-list">
+				Members:{" "}
+				{/* <button
 				style={{ height: "100px", width: "100px" }}
 				onClick={() => loadMembers()}
 			></button> */}
-			{leagueMembers
-				? leagueMembers.map((e) => (
-						<div key={e.first_name + e.last_name}>
-							Name: {e.first_name}
-						</div>
-				  ))
-				: null}
+				{leagueMembers
+					? leagueMembers.map((e, index) => (
+							<div
+								className="member-list-row"
+								key={e.first_name + e.last_name}
+							>
+								<div className="member-list-row-col">
+									{index + 1}
+								</div>
+								<div className="member-list-row-col">
+									Name: {e.first_name} {e.last_name}
+								</div>
+								<div className="member-list-row-col">
+									Global Rank: {e.global_rank}
+								</div>
+							</div>
+					  ))
+					: null}
+			</div>
 		</StyledActiveLeagueInfo>
 	);
 }

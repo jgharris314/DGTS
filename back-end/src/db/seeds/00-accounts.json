@@ -2,13 +2,56 @@
 	{
 		"username": "morganTheFifth",
 		"email": "bingotti@scotti.com",
-		"password": "bungocho",
-		"pdga_number": 0
+		"password": "Jacob555",
+		"pdga_number": 10,
+		"first_name": "Morgan",
+		"last_name": "the Fifth",
+		"global_rank": 0,
+		"previous_global_rank": 11,
+		"account_type": "player"
 	},
 	{
 		"username": "marveloProblemo",
 		"email": "meowww@zerrs.com",
-		"password": "BORISwasAgoodFRIEND",
-		"pdga_number": 1
+		"password": "Jacob555",
+		"pdga_number": 11,
+		"first_name": "Marvelo",
+		"last_name": "Problemo",
+		"global_rank": 1,
+		"previous_global_rank": 0,
+		"account_type": "player"
+	},
+	{
+		"username": "bawnner",
+		"email": "bawning@zerrs.com",
+		"password": "Jacob555",
+		"pdga_number": 12,
+		"first_name": "Bawn",
+		"last_name": "ner",
+		"global_rank": 2,
+		"previous_global_rank": 999,
+		"account_type": "player"
+	},
+	{
+		"username": "bewnt",
+		"email": "bewnt@zerrs.com",
+		"password": "Jacob555",
+		"pdga_number": 13,
+		"first_name": "Bewnt",
+		"last_name": "ughghgh",
+		"global_rank": 3,
+		"previous_global_rank": 989,
+		"account_type": "player"
+	},
+	{
+		"username": "Rekt",
+		"email": "rekt@zerrs.com",
+		"password": "Jacob555",
+		"pdga_number": 14,
+		"first_name": "Rekt",
+		"last_name": "sigh",
+		"global_rank": 4,
+		"previous_global_rank": 989,
+		"account_type": "manager"
 	}
 ]

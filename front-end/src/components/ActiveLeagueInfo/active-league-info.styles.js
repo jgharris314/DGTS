@@ -14,4 +14,26 @@ export const StyledActiveLeagueInfo = styled.div`
 		padding: 2%;
 		text-align: center;
 	}
+
+	.member-list {
+		display: flex;
+		flex-direction: column;
+		width: 85%;
+		position: relative;
+		margin: 0 auto;
+
+		&-row {
+			width: 100%;
+			display: flex;
+			flex-direction: row;
+			justify-content: center;
+
+			&-col {
+				display: flex;
+				flex-direction: column;
+				/* width: 10%; */
+				margin: 0 10px;
+			}
+		}
+	}
 `;
